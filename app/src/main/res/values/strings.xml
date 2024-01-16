@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ContactList</string>
+    <string name="age_and_origin">%s years from %s</string>
+</resources>
