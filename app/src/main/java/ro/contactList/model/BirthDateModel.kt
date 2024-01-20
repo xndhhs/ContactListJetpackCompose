@@ -1,6 +1,8 @@
 package ro.contactList.model
 
+import com.google.gson.annotations.SerializedName
+
 data class BirthDateModel(
-    val date: String,
-    val age: Int
+    @SerializedName("date") val date: String,
+    @SerializedName("age") val age: Int
 )

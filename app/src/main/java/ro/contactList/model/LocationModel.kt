@@ -1,11 +1,13 @@
 package ro.contactList.model
 
+import com.google.gson.annotations.SerializedName
+
 data class LocationModel(
-    val street: StreetModel,
-    val city: String,
-    val state: String,
-    val country: String,
-    val postCode: Int,
-    val coordinates: CoordinatesModel,
-    val timezone: TimezoneModel,
+    @SerializedName("street") val street: StreetModel,
+    @SerializedName("city") val city: String,
+    @SerializedName("state") val state: String,
+    @SerializedName("country") val country: String,
+    @SerializedName("postcode") val postCode: Int,
+    @SerializedName("coordinates") val coordinates: CoordinatesModel,
+    @SerializedName("timezone") val timezone: TimezoneModel,
 )

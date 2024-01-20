@@ -1,6 +1,8 @@
 package ro.contactList.model
 
+import com.google.gson.annotations.SerializedName
+
 data class StreetModel(
-    val number: Int,
-    val name: String
+    @SerializedName("number") val number: Int,
+    @SerializedName("name") val name: String
 )

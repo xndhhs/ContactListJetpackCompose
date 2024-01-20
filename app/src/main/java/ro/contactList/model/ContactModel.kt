@@ -1,16 +1,18 @@
 package ro.contactList.model
 
+import com.google.gson.annotations.SerializedName
+
 data class ContactModel(
-  val gender: String,
-  val name: NameModel,
-  val location: LocationModel,
-  val email: String,
-  val loginData: LoginDataModel,
-  val birthDateData: BirthDateModel,
-  val registerDateData: RegisterDateModel,
-  val phoneNumber: String,
-  val cellNumber: String,
-  val userInfoData: UserIdModel,
-  val pictureData: PictureModel,
-  val nationality: String
+    @SerializedName("gender") val gender: String,
+    @SerializedName("name") val name: NameModel,
+    @SerializedName("location") val location: LocationModel,
+    @SerializedName("email") val email: String,
+    @SerializedName("login") val loginData: LoginDataModel,
+    @SerializedName("dob") val birthDateData: BirthDateModel,
+    @SerializedName("registered") val registerDateData: RegisterDateModel,
+    @SerializedName("phone") val phoneNumber: String,
+    @SerializedName("cell") val cellNumber: String,
+    @SerializedName("id") val userInfoData: UserIdModel,
+    @SerializedName("picture") val pictureData: PictureModel,
+    @SerializedName("nat") val nationality: String
 )

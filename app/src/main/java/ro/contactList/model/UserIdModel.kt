@@ -1,6 +1,8 @@
 package ro.contactList.model
 
+import com.google.gson.annotations.SerializedName
+
 data class UserIdModel(
-    val name: String,
-    val value: String
+    @SerializedName("name") val name: String,
+    @SerializedName("value") val value: String
 )

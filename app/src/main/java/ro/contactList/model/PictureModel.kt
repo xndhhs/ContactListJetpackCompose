@@ -1,7 +1,9 @@
 package ro.contactList.model
 
+import com.google.gson.annotations.SerializedName
+
 data class PictureModel(
-    val large: String,
-    val medium: String,
-    val thumbnail: String
+    @SerializedName("large") val large: String,
+    @SerializedName("medium") val medium: String,
+    @SerializedName("thumbnail") val thumbnail: String
 )
