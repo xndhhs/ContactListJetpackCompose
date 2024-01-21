@@ -1,11 +1,13 @@
 package ro.contactList.services
 
-import android.content.Context
-import ro.contactList.model.ContactModel
-
 class ContactListServiceImpl(
-    private val contactListAPIService: ContactListAPIService,
-    context: Context
+    private val contactListAPIService: ContactListAPIService
 ) : ContactListService {
-    override suspend fun getContactList() = contactListAPIService.getContactList()
+    override suspend fun getContactList(
+        pageNumber: Int, resultsPerPage: Int, seed: String
+    ) = contactListAPIService.getContactList(
+        pageNumber = pageNumber,
+        resultsPerPage = resultsPerPage,
+        seed = seed
+    )
 }

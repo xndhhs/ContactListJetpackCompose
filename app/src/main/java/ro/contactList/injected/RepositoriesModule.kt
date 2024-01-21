@@ -1,15 +1,13 @@
 package ro.contactList.injected
 
-import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
-import ro.contactList.services.ContactListService
-import ro.contactList.services.ContactListServiceImpl
+import ro.contactList.repositories.ContactListRepository
+import ro.contactList.repositories.ContactListRepositoryImpl
 
 val repositoriesModule = module {
-    factory<ContactListService> {
-        ContactListServiceImpl(
-            contactListAPIService = get(),
-            context = androidContext()
+    factory<ContactListRepository> {
+        ContactListRepositoryImpl(
+            contactListService = get()
         )
     }
 }

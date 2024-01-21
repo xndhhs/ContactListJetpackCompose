@@ -2,7 +2,10 @@ package ro.contactList.ui.contact_list
 
 class ContactListContract {
     data class State(
-        val contactList: List<ContactItemUI>
+        var contactList: List<ContactItemUI>,
+        val initialPage: Int,
+        val resultsPerPage: Int = 20,
+        val seed: String = "abc"
     )
 
     data class ContactItemUI(

@@ -6,7 +6,13 @@ import ro.contactList.services.ContactListService
 class ContactListRepositoryImpl(
     private val contactListService: ContactListService
 ) : ContactListRepository {
-
-    override suspend fun getContactList() = contactListService.getContactList()
-
+    override suspend fun getContactList(
+        pageNumber: Int,
+        resultsPerPage: Int,
+        seed: String
+    ) = contactListService.getContactList(
+        pageNumber = pageNumber,
+        resultsPerPage = resultsPerPage,
+        seed = seed
+    )
 }

@@ -4,23 +4,29 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ro.contactList.interactors.ContactListUseCase
+import ro.contactList.ui.contact_list.ContactListContract.State
 
 class ContactListViewModel(
     private val contactListUseCase: ContactListUseCase
 ) : ViewModel() {
+
+    val state: MutableState<State> = mutableStateOf(State(emptyList(), 0))
+
     init {
-        viewModelScope.launch {
-            val contactList = contactListUseCase.getContactList()
-            val contactListUI = ContactItemUiTranslator.mapContentModelToUi(contactList)
-            state.value.copy(contactList = contactListUI)
+        viewModelScope.launch(Dispatchers.IO) {
+            val contactList = contactListUseCase.getContactList(
+                pageNumber = state.value.initialPage,
+                resultsPerPage = state.value.resultsPerPage,
+                seed = state.value.seed
+            )
+            val contactListUI = ContactItemUiTranslator.mapContentModelToUi(contactList.results)
+            state.value.contactList = contactListUI
         }
     }
 
-   val state: MutableState<ContactListContract.State> = mutableStateOf(
-        ContactListContract.State(
-            emptyList()
-        )
-    )
+
 }
+
