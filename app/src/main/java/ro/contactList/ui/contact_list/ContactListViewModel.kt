@@ -18,15 +18,13 @@ class ContactListViewModel(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val contactList = contactListUseCase.getContactList(
-                pageNumber = state.value.initialPage,
-                resultsPerPage = state.value.resultsPerPage,
-                seed = state.value.seed
+                pageNumber = 0,
+                resultsPerPage = 20,
+                seed = "abc"
             )
             val contactListUI = ContactItemUiTranslator.mapContentModelToUi(contactList.results)
             state.value.contactList = contactListUI
         }
     }
-
-
 }
 

@@ -14,6 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.End
@@ -33,6 +34,7 @@ import ro.contactList.ui.theme.custom_font
 @Composable
 fun ContactListScreen(viewState: androidx.compose.runtime.State<State>) {
     val state = viewState.value
+
     Column() {
         CenterAlignedTopAppBar(
             title = {
@@ -75,7 +77,9 @@ fun ContactListScreen(viewState: androidx.compose.runtime.State<State>) {
             )
         }
         FloatingActionButton(
-            modifier = Modifier.align(End).padding(16.dp),
+            modifier = Modifier
+                .align(End)
+                .padding(16.dp),
             shape = CircleShape,
             containerColor = Color.Red,
             contentColor = Color.White,
@@ -121,8 +125,8 @@ fun ContactListScreenPreview() {
                                 isFavourite = false,
                                 imageURL = "test"
                             )
-                        )
-
+                        ),
+                        initialPage = 0, resultsPerPage = 20, seed = "abc",
                     )
                 )
             }

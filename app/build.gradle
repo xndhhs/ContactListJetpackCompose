@@ -88,5 +88,5 @@ dependencies {
 
     //Okhttp
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.10.0'
-
+    implementation 'com.localebro:okhttpprofiler:1.0.8'
 }
