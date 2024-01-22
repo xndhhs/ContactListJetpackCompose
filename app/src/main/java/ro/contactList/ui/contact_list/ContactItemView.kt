@@ -32,7 +32,6 @@ import ro.contactList.common.Constants.STAR
 import ro.contactList.ui.contact_list.ContactListContract.ContactItemUI
 import ro.contactList.ui.theme.ContactListTheme
 import ro.contactList.ui.theme.custom_font
-import kotlin.random.Random
 
 @Composable
 fun ContactItemView(contactItemUI: ContactItemUI) {
@@ -49,9 +48,9 @@ fun ContactItemView(contactItemUI: ContactItemUI) {
                 .padding(horizontal = 16.dp)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                ProfilePicture(contactItemUI.imageURL, 48.dp)
+                ProfilePicture(contactItemUI.imageURL, 60.dp)
                 Spacer(modifier = Modifier.width(8.dp))
-                UserInfoSecrion(contactItemUI)
+                UserInfoSection(contactItemUI)
             }
             TimeInfoSection(contactItemUI)
         }
@@ -97,7 +96,7 @@ private fun TimeInfoSection(contactItemUI: ContactItemUI) {
 }
 
 @Composable
-private fun UserInfoSecrion(contactItemUI: ContactItemUI) {
+private fun UserInfoSection(contactItemUI: ContactItemUI) {
     Column {
         Text(
             text = contactItemUI.name,

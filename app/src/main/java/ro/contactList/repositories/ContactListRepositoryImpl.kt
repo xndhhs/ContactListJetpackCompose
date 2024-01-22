@@ -1,5 +1,7 @@
 package ro.contactList.repositories
 
+import kotlinx.coroutines.delay
+import ro.contactList.model.ContactListModel
 import ro.contactList.services.ContactListService
 
 class ContactListRepositoryImpl(
@@ -9,9 +11,12 @@ class ContactListRepositoryImpl(
         pageNumber: Int,
         resultsPerPage: Int,
         seed: String
-    ) = contactListService.getContactList(
-        pageNumber = pageNumber,
-        resultsPerPage = resultsPerPage,
-        seed = seed
-    )
+    ): ContactListModel {
+        delay(3000L)
+        return contactListService.getContactList(
+            pageNumber = pageNumber,
+            resultsPerPage = resultsPerPage,
+            seed = seed
+        )
+    }
 }

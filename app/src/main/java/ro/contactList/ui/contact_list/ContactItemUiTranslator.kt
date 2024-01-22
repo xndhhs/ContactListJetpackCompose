@@ -11,7 +11,7 @@ object ContactItemUiTranslator {
     fun mapContentModelToUi(contactModelList: List<ContactModel>): List<ContactListContract.ContactItemUI> {
         return contactModelList.map {
             ContactListContract.ContactItemUI(
-                imageURL = it.pictureData.thumbnail,
+                imageURL = it.pictureData.large,
                 name = it.name.first + " " + it.name.last,
                 age = it.birthDateData.age,
                 countryOfOrigin = it.nationality,
