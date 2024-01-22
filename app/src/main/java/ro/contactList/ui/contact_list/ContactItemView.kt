@@ -2,6 +2,7 @@ package ro.contactList.ui.contact_list
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.End
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -48,7 +50,7 @@ fun ContactItemView(contactItemUI: ContactItemUI) {
                 .padding(horizontal = 16.dp)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                ProfilePicture(contactItemUI.imageURL, 60.dp)
+                ProfilePicture(contactItemUI, 60.dp)
                 Spacer(modifier = Modifier.width(8.dp))
                 UserInfoSection(contactItemUI)
             }
@@ -116,20 +118,33 @@ private fun UserInfoSection(contactItemUI: ContactItemUI) {
 }
 
 @Composable
-private fun ProfilePicture(profilePicture: String, imageSize: Dp) {
+private fun ProfilePicture(contactItemUI: ContactItemUI, imageSize: Dp) {
     Card(
         shape = CircleShape,
         border = BorderStroke(
             width = 2.dp,
-            color = MaterialTheme.colorScheme.onError
+            color = MaterialTheme.colorScheme.error
         ),
     ) {
-        AsyncImage(
-            model = profilePicture,
-            contentDescription = "Content description",
-            modifier = Modifier.size(imageSize),
-            contentScale = ContentScale.Crop,
-        )
+        if (contactItemUI.imageURL.isNotEmpty()) {
+            AsyncImage(
+                model = contactItemUI.imageURL,
+                contentDescription = "Content description",
+                modifier = Modifier.size(imageSize),
+                contentScale = ContentScale.Crop,
+            )
+        } else {
+            Box(
+                contentAlignment = Center,
+                modifier = Modifier.size(imageSize)
+            ) {
+                Text(
+                    text = contactItemUI.name.substring(0, 1),
+                    style = MaterialTheme.typography.displaySmall,
+                    color = MaterialTheme.colorScheme.error
+                    )
+            }
+        }
     }
 }
 
