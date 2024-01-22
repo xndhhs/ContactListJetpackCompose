@@ -14,7 +14,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.End
@@ -23,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.compose.collectAsLazyPagingItems
 import ro.contactList.common.Constants.EDIT
 import ro.contactList.common.Constants.MENU
 import ro.contactList.common.Constants.SEARCH
@@ -32,9 +32,9 @@ import ro.contactList.ui.theme.custom_font
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactListScreen(viewState: androidx.compose.runtime.State<State>) {
-    val state = viewState.value
-
+fun ContactListScreen(viewModel: ContactListViewModel) {
+    val state = viewModel.contactPager.collectAsLazyPagingItems()
+    println("abab VM screen app ${state.itemSnapshotList}")
     Column() {
         CenterAlignedTopAppBar(
             title = {
@@ -66,13 +66,14 @@ fun ContactListScreen(viewState: androidx.compose.runtime.State<State>) {
 
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(
-                count = state.contactList.size,
-                key = { state.contactList[it].name },
+                count = state.itemCount,
                 contentType = { ContactListContract.ContactItemUI::class.java },
                 itemContent = { index ->
-                    ContactItemView(
-                        state.contactList[index]
-                    )
+//                    if (index >= state.contactList.size - 3 && state.currentPage < MAX_PAGE) {
+//                        viewModel.state.copy(currentPage = viewModel.state.currentPage + 1)
+//                        viewModel.loadItems(viewModel.state.currentPage)
+//                    }
+                    state[index]?.let { ContactItemView(it) }
                 }
             )
         }
@@ -126,11 +127,11 @@ fun ContactListScreenPreview() {
                                 imageURL = "test"
                             )
                         ),
-                        initialPage = 0, resultsPerPage = 20, seed = "abc",
+                        currentPage = 0, resultsPerPage = 20, seed = "abc",
                     )
                 )
             }
-            ContactListScreen(viewState = viewState)
+//            ContactListScreen(viewState = viewState.value, viewModel = ContactListViewModel())
         }
     }
 }

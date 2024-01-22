@@ -7,7 +7,7 @@ import ro.contactList.ui.contact_list.ContactListViewModel
 val viewModelModule = module {
     viewModel {
         ContactListViewModel(
-            contactListUseCase =get()
+            contactListRepository = get()
         )
     }
 }

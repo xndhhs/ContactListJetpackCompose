@@ -11,4 +11,4 @@ val apiModule = module {
     single { get<Retrofit>().create(ContactListAPIService::class.java) }
 }
 
-val appModules = listOf(apiModule, viewModelModule, useCaseModule, repositoriesModule, servicesModule)
+val appModules = listOf(apiModule, viewModelModule, repositoriesModule, servicesModule)

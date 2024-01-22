@@ -38,8 +38,9 @@ fun ContactApp() {
     val navigationController = rememberNavController()
     NavHost(navController = navigationController, startDestination = "contact_list") {
         composable("contact_list") {
-            val viewModel: ContactListViewModel = getViewModel()
-            ContactListScreen(viewState = viewModel.state)
+            val viewModel = getViewModel<ContactListViewModel>()
+            println("abab VM main app ${viewModel.contactPager}")
+            ContactListScreen(viewModel = viewModel)
         }
     }
 }

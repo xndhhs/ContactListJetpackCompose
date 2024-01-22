@@ -1,30 +1,23 @@
 package ro.contactList.ui.contact_list
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import ro.contactList.common.Constants.ITEMS_PER_PAGE
 import ro.contactList.interactors.ContactListUseCase
-import ro.contactList.ui.contact_list.ContactListContract.State
+import ro.contactList.repositories.ContactListRepository
 
 class ContactListViewModel(
-    private val contactListUseCase: ContactListUseCase
+    private val contactListRepository: ContactListRepository
 ) : ViewModel() {
 
-    val state: MutableState<State> = mutableStateOf(State(emptyList(), 0))
+    val contactPager = Pager(
+        PagingConfig(pageSize = ITEMS_PER_PAGE, prefetchDistance = ITEMS_PER_PAGE - 3)
+    ) {
+        ContactListUseCase(contactListRepository)
+    }.flow.cachedIn(viewModelScope)
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            val contactList = contactListUseCase.getContactList(
-                pageNumber = 0,
-                resultsPerPage = 20,
-                seed = "abc"
-            )
-            val contactListUI = ContactItemUiTranslator.mapContentModelToUi(contactList.results)
-            state.value.contactList = contactListUI
-        }
-    }
 }
 

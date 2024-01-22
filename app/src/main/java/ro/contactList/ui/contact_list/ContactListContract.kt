@@ -1,11 +1,13 @@
 package ro.contactList.ui.contact_list
 
+import ro.contactList.common.Constants
+
 class ContactListContract {
     data class State(
         var contactList: List<ContactItemUI>,
-        val initialPage: Int,
-        val resultsPerPage: Int = 20,
-        val seed: String = "abc"
+        val currentPage: Int,
+        val resultsPerPage: Int = Constants.ITEMS_PER_PAGE,
+        val seed: String = Constants.SEED
     )
 
     data class ContactItemUI(
